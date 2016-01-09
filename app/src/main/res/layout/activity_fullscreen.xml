@@ -1,0 +1,89 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FullscreenActivity"
+    android:id="@+id/main_layout1"
+    android:animateLayoutChanges="true">
+
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+
+
+    <TextView
+        android:layout_width="318dp"
+        android:layout_height="95dp"
+        android:text="0 posts"
+        android:id="@+id/posts"
+        android:layout_gravity="center_horizontal|top"
+        android:textSize="20dp"
+        android:gravity="center" />
+
+    <Button
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:id="@+id/click"
+        android:layout_gravity="center"
+        android:onClick="dre" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shop"
+        android:id="@+id/menu"
+        android:layout_gravity="left|bottom"
+        android:onClick="SendMe" />
+
+    <Button
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:text="Обнулить"
+        android:id="@+id/button2"
+        android:layout_gravity="center_horizontal|bottom"
+        android:onClick="Enull" />
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="Achievments"
+        android:id="@+id/button4"
+        android:layout_gravity="right|bottom"
+        android:onClick="getAch" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView"
+        android:layout_gravity="right|top"
+        android:background="@drawable/background"
+        android:visibility="invisible" />
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listView2"
+        android:layout_gravity="center|bottom"
+        android:listSelector="@android:color/transparent"
+        android:cacheColorHint="@android:color/transparent"
+        android:visibility="invisible"
+        android:alpha="1.0"
+        />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="112dp"
+        android:layout_height="33dp"
+        android:text="Close"
+        android:id="@+id/button"
+        android:layout_gravity="right|top"
+        android:onClick="Lose"
+        android:visibility="invisible" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добавить бабла"
+        android:id="@+id/increase"
+        android:layout_gravity="left|top" />
+</FrameLayout>
