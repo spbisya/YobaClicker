@@ -2,6 +2,8 @@ package com.mdgagj.clicker3;
 
 import android.content.res.AssetManager;
 
+import java.math.BigInteger;
+
 /**
  * Created by 777 on 1/2/2016.
  */
@@ -15,14 +17,15 @@ public class TestItem {
      * price - цена вещи
      * cps_value - значение ускорителя
      */
-    int level, type, imageIco;
-    String itemDescr, cps_value;
-    long price;
-    Double increment;
-    AssetManager assets;
+  private   int type, imageIco;
+    private long level;
+    private  String itemDescr, cps_value;
+    private  BigInteger price;
+    private  BigInteger increment;
+    private  AssetManager assets;
 
 
-    TestItem(int imageIco, String itemDescr, String cps_value, long price, int level, int type, AssetManager assets, Double increment) {
+    TestItem(int imageIco, String itemDescr, String cps_value, BigInteger price, long level, int type, AssetManager assets, BigInteger increment) {
         this.imageIco = imageIco;
         this.itemDescr = itemDescr;
         this.cps_value = cps_value;
@@ -33,7 +36,7 @@ public class TestItem {
         this.increment=increment;
     }
 
-    public Double getIncrement() {
+    public BigInteger getIncrement() {
         return increment;
     }
 
@@ -41,31 +44,15 @@ public class TestItem {
         return assets;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(long level) {
         this.level = level;
     }
 
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public void setImageIco(int imageIco) {
-        this.imageIco = imageIco;
-    }
-
-    public void setItemDescr(String itemDescr) {
-        this.itemDescr = itemDescr;
-    }
-
-    public void setCps_value(String cps_value) {
-        this.cps_value = cps_value;
-    }
-
-    public void setPrice(long price) {
+    public void setPrice(BigInteger price) {
         this.price = price;
     }
 
-    public int getLevel() {
+    public long getLevel() {
         return level;
     }
 
@@ -85,7 +72,7 @@ public class TestItem {
         return cps_value;
     }
 
-    public long getPrice() {
+    public BigInteger getPrice() {
         return price;
     }
 }

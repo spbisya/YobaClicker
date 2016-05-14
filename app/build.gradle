@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.mdgagj.clicker3"
-        minSdkVersion 17
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -24,4 +24,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:support-v4:22.2.1'
     compile files('libs/LeonidsLib.jar')
+    compile 'me.grantland:autofittextview:0.2.+'
 }

@@ -35,9 +35,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/priceImg"
-        android:background="@drawable/yoba_item"
         android:layout_below="@+id/itemDescr"
-        android:layout_toEndOf="@+id/imageIco" />
+        android:layout_toEndOf="@+id/imageIco"
+        android:scaleType="fitXY" />
 
     <TextView
         android:layout_width="57dp"

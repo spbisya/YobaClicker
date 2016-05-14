@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FullscreenActivity"
@@ -11,21 +11,48 @@
          TextureView, etc. -->
 
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView2"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/back_resized"
+        android:scaleType="fitXY" />
+
     <TextView
-        android:layout_width="318dp"
-        android:layout_height="95dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="0 posts"
         android:id="@+id/posts"
         android:layout_gravity="center_horizontal|top"
         android:textSize="20dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0 per second"
+        android:id="@+id/increment"
+        android:layout_below="@+id/posts"
+        android:layout_alignEnd="@+id/achievements"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
 
     <Button
         android:layout_width="256dp"
         android:layout_height="256dp"
         android:id="@+id/click"
         android:layout_gravity="center"
-        android:onClick="dre" />
+        android:onClick="dre"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -33,23 +60,38 @@
         android:text="Shop"
         android:id="@+id/menu"
         android:layout_gravity="left|bottom"
-        android:onClick="SendMe" />
+        android:onClick="SendMe"
+        android:layout_alignTop="@+id/nullAll"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="122dp"
         android:layout_height="wrap_content"
         android:text="Обнулить"
-        android:id="@+id/button2"
+        android:id="@+id/nullAll"
         android:layout_gravity="center_horizontal|bottom"
-        android:onClick="Enull" />
+        android:onClick="Enull"
+        android:layout_alignTop="@+id/achievements"
+        android:layout_toStartOf="@+id/achievements" />
 
     <Button
         android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="Achievments"
-        android:id="@+id/button4"
+        android:id="@+id/achievements"
         android:layout_gravity="right|bottom"
-        android:onClick="getAch" />
+        android:onClick="getAch"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/close" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Добавить"
+        android:id="@+id/increase"
+        android:layout_gravity="left|top"
+        android:layout_alignTop="@+id/nullAll"
+        android:layout_toStartOf="@+id/nullAll" />
 
     <ImageView
         android:layout_width="fill_parent"
@@ -62,7 +104,7 @@
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listView2"
+        android:id="@+id/listView"
         android:layout_gravity="center|bottom"
         android:listSelector="@android:color/transparent"
         android:cacheColorHint="@android:color/transparent"
@@ -75,15 +117,11 @@
         android:layout_width="112dp"
         android:layout_height="33dp"
         android:text="Close"
-        android:id="@+id/button"
+        android:id="@+id/close"
         android:layout_gravity="right|top"
         android:onClick="Lose"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Добавить бабла"
-        android:id="@+id/increase"
-        android:layout_gravity="left|top" />
-</FrameLayout>
+</RelativeLayout>

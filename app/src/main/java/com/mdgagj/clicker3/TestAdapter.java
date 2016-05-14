@@ -56,17 +56,17 @@ public class TestAdapter extends BaseAdapter {
 
         Typeface face = Typeface.createFromAsset(items.get(position).getAssets(), "9607.ttf");
 
-        imageIco.setImageResource(items.get(position).getImageIco());
+       // imageIco.setImageResource(items.get(position).getImageIco());
         itemDescr.setText(items.get(position).getItemDescr());
-        itemDescr.setTypeface(face);
+       // itemDescr.setTypeface(face);
         type.setText(items.get(position).getType() == 0 ? "Click" : "Bps");
-        type.setTypeface(face);
+      //  type.setTypeface(face);
         price.setText("" + items.get(position).getPrice());
-        price.setTypeface(face);
+      //  price.setTypeface(face);
         cps_value.setText("" + items.get(position).getCps_value());
-        cps_value.setTypeface(face);
+       // cps_value.setTypeface(face);
         level.setText("" + items.get(position).getLevel());
-        level.setTypeface(face);
+       // level.setTypeface(face);
         return convertView;
     }
 }
