@@ -1,6 +1,12 @@
 package com.mdgagj.clicker3;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -8,13 +14,19 @@ import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ThumbnailUtils;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +41,7 @@ import java.util.TimerTask;
 import me.grantland.widget.AutofitHelper;
 
 
-public class FullscreenActivity extends Activity {
+public class FullscreenActivity extends AppCompatActivity {
     public BigInteger incrementEverySecond = BigInteger.ONE;
     public BigInteger postsCount = BigInteger.ZERO;
     public BigInteger buttonIncrement = BigInteger.ONE;
@@ -48,37 +60,95 @@ public class FullscreenActivity extends Activity {
     };
     public long[] counts = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     SharedPreferences sPref;
+    Button yobaButton;
     ListView lv;
     Resources res;
     ArrayList<TestItem> items;
+    ObjectAnimator animationType2;
     Timer timer = new Timer();
     Timer timer1 = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
-            postsCount = postsCount.add(incrementEverySecond);
+            if (!paused) postsCount = postsCount.add(incrementEverySecond);
         }
     };
     TimerTask task1 = new TimerTask() {
 
         public void run() {
-            setText();
+            if (!paused) setText();
         }
 
     };
-
+    RelativeLayout shopView, mainView;
+    AnimatorSet setIn, setOut;
+    Boolean paused = false, isShopping = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        final Window win = getWindow();
+        win.addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
+                WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_fullscreen);
         sPref = getPreferences(MODE_PRIVATE);
         res = getResources();
         Bitmap allah = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeResource(res, R.drawable.yoba_button),
                 256, 256);
-        Button button = (Button) findViewById(R.id.click);
+        yobaButton = (Button) findViewById(R.id.click);
         BitmapDrawable bdrawable = new BitmapDrawable(res, allah);
-        button.setBackground(bdrawable);
+        yobaButton.setBackground(bdrawable);
+
+
+        shopView = (RelativeLayout) findViewById(R.id.shopView);
+        mainView = (RelativeLayout) findViewById(R.id.mainView);
+
+        animationType2 = ObjectAnimator.ofFloat(yobaButton, "rotation", 0f, 360.0f);
+        animationType2.setDuration(1000 * 60 * 1);
+        animationType2.setRepeatCount(ValueAnimator.INFINITE);
+
+
+        ObjectAnimator relativeIn = ObjectAnimator.ofFloat(shopView, "rotation", -90f, 0f);
+        ObjectAnimator alphaIn = ObjectAnimator.ofFloat(shopView, "aplha", 0f, 1f);
+        setIn = new AnimatorSet();
+        setIn.playTogether(alphaIn, relativeIn);
+        setIn.setDuration(300);
+
+        ObjectAnimator relativeOut = ObjectAnimator.ofFloat(shopView, "rotation", 0f, 90f);
+        ObjectAnimator alphaOut = ObjectAnimator.ofFloat(shopView, "alpha", 1f, 0f);
+        setOut = new AnimatorSet();
+        setOut.playTogether(relativeOut, alphaOut);
+        setOut.setDuration(300);
+        setOut.setStartDelay(100);
+        setOut.addListener(new Animator.AnimatorListener() {
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                // TODO Auto-generated method stub
+                mainView.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+                // TODO Auto-generated method stub
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                // TODO Auto-generated method stub
+                shopView.setVisibility(View.INVISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                // TODO Auto-generated method stub
+
+            }
+        });
 
         postsView = (TextView) findViewById(R.id.posts);
         incrementView = (TextView) findViewById(R.id.increment);
@@ -87,6 +157,7 @@ public class FullscreenActivity extends Activity {
         AutofitHelper.create(incrementView).setMaxLines(1);
 
         lv = (ListView) findViewById(R.id.listView);
+
 
         Typeface face = Typeface.createFromAsset(getAssets(), "fofbb_reg.ttf");
         postsView.setTypeface(face);
@@ -125,6 +196,8 @@ public class FullscreenActivity extends Activity {
                         prices[position] = items.get(position).getPrice();
                         counts[position] = items.get(position).getLevel();
                         lv.setAdapter(new TestAdapter(FullscreenActivity.this, items));
+                    } else {
+                        Toast.makeText(FullscreenActivity.this, "Недостаточно багортов, чел!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     if (postsCount.compareTo(items.get(position).getPrice()) == 1) {
@@ -135,6 +208,8 @@ public class FullscreenActivity extends Activity {
                         prices[position] = items.get(position).getPrice();
                         counts[position] = items.get(position).getLevel();
                         lv.setAdapter(new TestAdapter(FullscreenActivity.this, items));
+                    } else {
+                        Toast.makeText(FullscreenActivity.this, "Недостаточно багортов, чел!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -143,29 +218,14 @@ public class FullscreenActivity extends Activity {
         postsCount = new BigInteger(sPref.getString("postsCount", "0"));
         incrementEverySecond = new BigInteger(sPref.getString("incrementEverySecond", "1"));
 
-
-        String postsViewText = "" + postsCount + " yobs";
+        String postsViewText = "" + postsCount + " бугуртов";
         postsView.setText(postsViewText);
-        String incrementViewText = "" + incrementEverySecond + " per second";
+        String incrementViewText = "" + incrementEverySecond + " в секунду";
         incrementView.setText(incrementViewText);
-
-
-        task = new TimerTask() {
-            public void run() {
-                postsCount = postsCount.add(incrementEverySecond);
-            }
-        };
-
-        task1 = new TimerTask() {
-
-            public void run() {
-                setText();
-            }
-
-        };
 
         timer.schedule(task, 0, 1000);
         timer1.schedule(task1, 0, 100);
+        animationType2.start();
 
         Button increase = (Button) findViewById(R.id.increase);
         increase.setOnClickListener(new View.OnClickListener() {
@@ -175,15 +235,48 @@ public class FullscreenActivity extends Activity {
 
             }
         });
+
+        Button achievements = (Button) findViewById(R.id.achievements);
+        achievements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FullscreenActivity.this, AchievementsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        final Button close = (Button) findViewById(R.id.close);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                closeShop();
+            }
+        });
+
+        Button open = (Button) findViewById(R.id.shop);
+        open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                int width = shopView.getWidth();
+                shopView.setPivotX(width);
+                shopView.setPivotY(0);
+                shopView.setVisibility(View.VISIBLE);
+                mainView.setVisibility(View.INVISIBLE);
+                setIn.start();
+                isShopping = true;
+                paused = true;
+            }
+        });
     }
 
     private void setText() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                String postsViewText = "" + postsCount + " yobs";
+                String postsViewText = "" + postsCount + " бугуртов";
                 postsView.setText(postsViewText);
-                String incrementViewText = "" + incrementEverySecond + " per second";
+                String incrementViewText = "" + incrementEverySecond + " в секунду";
                 incrementView.setText(incrementViewText);
                 Log.d("Dre", "Text set, postsCount = " + postsCount.toString() + " buttonIncrement = "
                         + buttonIncrement.toString() + " incrementEverySecond = " + incrementEverySecond.toString());
@@ -191,23 +284,6 @@ public class FullscreenActivity extends Activity {
         });
     }
 
-    public void Lose(View v) {
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        imageView.setVisibility(View.INVISIBLE);
-        ListView listView = (ListView) findViewById(R.id.listView);
-        listView.setVisibility(View.INVISIBLE);
-        Button button = (Button) findViewById(R.id.close);
-        button.setVisibility(View.INVISIBLE);
-    }
-
-    public void SendMe(View v) {
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
-        imageView.setVisibility(View.VISIBLE);
-        lv.setVisibility(View.VISIBLE);
-        //  lv.requestLayout();
-        Button button = (Button) findViewById(R.id.close);
-        button.setVisibility(View.VISIBLE);
-    }
 
     public void Enull(View v) {
         sPref = getPreferences(MODE_PRIVATE);
@@ -230,6 +306,12 @@ public class FullscreenActivity extends Activity {
             ed.putLong("count" + i, counts[i]);
         }
         ed.apply();
+        paused = true;
+    }
+
+    public void onResume() {
+        super.onResume();
+        paused = false;
     }
 
     public void getAch(View v) {
@@ -243,10 +325,43 @@ public class FullscreenActivity extends Activity {
         ParticleSystem part = new ParticleSystem(this, 5 + random.nextInt(20), R.drawable.yoba_particle, 3000);
         part.setSpeedRange(0.2f, 0.5f)
                 .setRotationSpeed(144);
-        part.oneShot(findViewById(R.id.click), 5 + random.nextInt(20));
+        part.oneShot(findViewById(R.id.center), 5 + random.nextInt(20));
         postsCount = postsCount.add(buttonIncrement);
         Log.d("Dre", "Button pressed, postsCount = " + postsCount.toString() + " buttonIncrement = "
                 + buttonIncrement.toString());
     }
+
+    public void closeShop() {
+        shopView.setPivotX(0);
+        shopView.setPivotY(0);
+        setOut.start();
+        isShopping = false;
+        paused = false;
+
+    }
+
+
+    public void onBackPressed() {
+        if (isShopping) closeShop();
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Уверен, что хошь ливнуть, пидр??")
+                    .setPositiveButton("В натуре", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Я подумаю...", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+
+                        }
+                    });
+            AlertDialog d = builder.create();
+            d.setTitle("Выпил");
+            d.show();
+        }
+    }
+
 
 }

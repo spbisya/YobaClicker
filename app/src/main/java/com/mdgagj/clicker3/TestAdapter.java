@@ -54,7 +54,7 @@ public class TestAdapter extends BaseAdapter {
         TextView cps_value = (TextView) convertView.findViewById(R.id.cps_value);
         TextView level = (TextView) convertView.findViewById(R.id.level);
 
-        Typeface face = Typeface.createFromAsset(items.get(position).getAssets(), "9607.ttf");
+      //  Typeface face = Typeface.createFromAsset(items.get(position).getAssets(), "9607.ttf");
 
        // imageIco.setImageResource(items.get(position).getImageIco());
         itemDescr.setText(items.get(position).getItemDescr());
