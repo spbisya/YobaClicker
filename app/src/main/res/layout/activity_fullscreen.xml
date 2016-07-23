@@ -1,9 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FullscreenActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout1"
-    android:animateLayoutChanges="true">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+
+    tools:context=".FullscreenActivity">
 
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -12,157 +15,132 @@
 
 
     <RelativeLayout
+        android:id="@+id/mainView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/mainView"
+        android:layout_alignParentTop="true"
         android:visibility="visible">
 
         <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/imageView2"
-            android:src="@drawable/back_resized"
-            android:scaleType="fitXY"
             android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/back_resized"
             android:visibility="visible" />
 
         <TextView
+            android:id="@+id/posts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0 posts"
-            android:id="@+id/posts"
-            android:layout_gravity="center_horizontal|top"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="false"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal|top"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:visibility="visible"
-            android:textColor="#FFFFFF" />
-
-        <ImageView
-            android:layout_width="1dp"
-            android:layout_height="1dp"
-            android:id="@+id/center"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="0 posts"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
             android:visibility="visible" />
 
         <TextView
+            android:id="@+id/increment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0 per second"
-            android:id="@+id/increment"
-            android:gravity="center"
-            android:textSize="20dp"
-            android:layout_below="@+id/posts"
-            android:layout_alignRight="@+id/posts"
             android:layout_alignEnd="@+id/posts"
             android:layout_alignLeft="@+id/posts"
+            android:layout_alignRight="@+id/posts"
             android:layout_alignStart="@+id/posts"
-            android:visibility="visible"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:text="Achievments"
-            android:id="@+id/achievements"
-            android:layout_gravity="right|bottom"
-            android:onClick="getAch"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/posts"
+            android:gravity="center"
+            android:text="0 per second"
+            android:textColor="#FFFFFF"
+            android:textSize="20dp"
             android:visibility="visible" />
 
         <Button
+            android:id="@+id/click"
             android:layout_width="256dp"
             android:layout_height="256dp"
-            android:id="@+id/click"
-            android:layout_gravity="center"
-            android:onClick="dre"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
             android:visibility="visible" />
 
-        <Button
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/achievementsFab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shop"
-            android:id="@+id/shop"
-            android:layout_gravity="left|bottom"
-            android:layout_alignTop="@+id/nullAll"
-            android:layout_alignParentStart="true"
-            android:visibility="visible" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="15dp"
+            android:alpha="1"
+            android:clickable="true"
+            android:src="@drawable/ic_trending_up_white_36dp"
+            android:visibility="visible"
+            app:elevation="24dp"
+            app:fabSize="normal" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/shopFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="15dp"
+            android:alpha="1"
+            android:clickable="true"
+            android:src="@drawable/ic_shopping_basket_white_36dp"
+            android:visibility="visible"
+            app:elevation="24dp"
+            app:fabSize="normal" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/settingsFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="15dp"
+            android:alpha="0"
+            android:clickable="true"
+            android:src="@drawable/ic_settings_white_36dp"
+            android:visibility="visible"
+            app:elevation="24dp"
+            app:fabSize="normal" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/menuFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="15dp"
+            android:clickable="true"
+            android:src="@drawable/ic_menu_white_36dp"
+            app:elevation="24dp"
+            app:fabSize="normal" />
 
         <Button
+            android:id="@+id/nullAll"
             android:layout_width="122dp"
             android:layout_height="wrap_content"
-            android:text="Обнулить"
-            android:id="@+id/nullAll"
+            android:layout_alignBottom="@+id/menuFab"
+            android:layout_alignStart="@+id/increment"
             android:layout_gravity="center_horizontal|bottom"
             android:onClick="Enull"
-            android:layout_alignTop="@+id/achievements"
-            android:layout_toStartOf="@+id/achievements"
+            android:text="Обнулить"
             android:visibility="visible" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Добавить"
-            android:id="@+id/increase"
-            android:layout_gravity="left|top"
-            android:layout_alignTop="@+id/nullAll"
-            android:layout_toStartOf="@+id/nullAll"
-            android:visibility="visible"
-            android:layout_toRightOf="@+id/shop" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/shopView"
-        android:visibility="invisible"
-        android:alpha="0">
-
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/imageView"
-            android:layout_gravity="right|top"
-            android:background="@drawable/background"
-            android:visibility="visible" />
-
-        <ListView
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/listView"
-            android:layout_gravity="center|bottom"
-            android:listSelector="@android:color/transparent"
-            android:cacheColorHint="@android:color/transparent"
-            android:visibility="visible"
-            android:alpha="1.0"
-            />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="112dp"
-            android:layout_height="33dp"
-            android:text="Close"
-            android:id="@+id/close"
-            android:layout_gravity="right|top"
-            android:visibility="visible"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true" />
-
     </RelativeLayout>
 
 </RelativeLayout>

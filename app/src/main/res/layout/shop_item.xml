@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="3dp"
+        android:id="@+id/card"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="#fafafa">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fafafa">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/item_image"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/icon" />
+
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:paddingStart="10dp"
+                android:text="Помолиться Аллаху"
+                android:textColor="#212121"
+                android:textSize="24sp"
+                android:gravity="center_vertical|start"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/item_image"
+                android:paddingBottom="25dp" />
+
+            <TextView
+                android:text="₽"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/priceText"
+                android:paddingStart="6dp"
+                android:textSize="16sp"
+                android:paddingEnd="10dp"
+                android:gravity="center_vertical|start"
+                android:textColor="#212121"
+                android:layout_alignBottom="@+id/item_image"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:text="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/price"
+                android:textColor="@android:color/holo_orange_dark"
+                tools:textColor="#ff6f00"
+                android:layout_alignBottom="@+id/priceText"
+                android:layout_toEndOf="@+id/item_image"
+                android:layout_toStartOf="@+id/priceText"
+                android:gravity="center_vertical|end" />
+
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:text="0"
+                android:textColor="#212121"
+                android:layout_toEndOf="@+id/item_image"
+                android:paddingStart="10dp"
+                android:layout_above="@+id/price"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/levelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="уровень"
+                android:textSize="14sp"
+                android:textColor="#757575"
+                android:layout_alignTop="@+id/level"
+                android:layout_toEndOf="@+id/level"
+                android:layout_alignBottom="@+id/level"
+                android:gravity="center"
+                android:paddingEnd="15dp" />
+
+            <TextView
+                android:id="@+id/bps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:text="+0"
+                android:textColor="#212121"
+                android:layout_alignBaseline="@+id/levelText"
+                android:layout_alignBottom="@+id/levelText"
+                android:layout_toEndOf="@+id/levelText" />
+
+            <TextView
+                android:id="@+id/bpsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:text="б/с"
+                android:textSize="16sp"
+                android:textColor="#757575"
+                android:layout_alignBottom="@+id/bps"
+                android:layout_toEndOf="@+id/bps" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -22,6 +22,7 @@
             android:name=".AchievementsActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"></activity>
+        <activity android:name=".ShopActivity"></activity>
     </application>
 
 </manifest>
